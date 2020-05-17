@@ -14,11 +14,10 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  
   final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
- 
+
   final titleStyle = TextStyle(
     color: Colors.black,
     fontFamily: 'Roboto',
@@ -33,7 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     height: 1.2,
   );
 
-  // Returns list of _indicator widgets that is placed at the bottom of screen 
+  // Returns list of _indicator widgets that is placed at the bottom of screen
   // Determines active screen
   List<Widget> _buildPageIndicator() {
     print('initScreen $initScreen');
@@ -44,16 +43,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return list;
   }
 
-  // Returns a single oval shape at the bottom of the screen. 
-  // helper for _buildPageIndicator() method   
+  // Returns a single oval shape at the bottom of the screen.
+  // helper for _buildPageIndicator() method
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
       margin: EdgeInsets.symmetric(horizontal: 8.0),
-      height: 8.0, 
-      width: isActive ? 24.0 : 16.0,    // if current screen is active then return an elongated oval
+      height: 8.0,
+      width: isActive
+          ? 24.0
+          : 16.0, // if current screen is active then return an elongated oval
       decoration: BoxDecoration(
-        color: isActive ? themeColor : Colors.grey[300],    // if current screen is active then color the oval orange else make it grey
+        color: isActive
+            ? themeColor
+            : Colors.grey[
+                300], // if current screen is active then color the oval orange else make it grey
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -66,16 +70,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: Container(
-            // Make background of page
+              // Make background of page
               decoration: BoxDecoration(
                   color: themeColor,
 
-                  // Background is orange and white in ratio 2 : 1 
+                  // Background is orange and white in ratio 2 : 1
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [themeColor, Colors.white],
-                    stops: [0.66, 0.66],     
+                    stops: [0.66, 0.66],
                   )),
               child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -87,17 +91,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         alignment: Alignment.centerRight,
                         child: FlatButton(
                           onPressed: () async {
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
                             initScreen = prefs.getInt("initScreen");
                             await prefs.setInt("initScreen", 1);
                             print('initScreen $initScreen');
                             Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Login()),
-                          );
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
                           },
                           child: Text(
                             'Skip',
+                            key: Key('Skip'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -107,6 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                       // Container that contains the swipeable onboarding objects
                       Container(
+                        key: Key('pageContainer'),
                         height: SizeConfig.safeBlockVertical * 80,
                         child: PageView(
                           physics: ClampingScrollPhysics(),
@@ -122,6 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: <Widget>[
                             // Each screen contains text and image field
                             Padding(
+                                key: Key('firstPage'),
                                 padding: EdgeInsets.symmetric(
                                     vertical: SizeConfig.safeBlockVertical * 3,
                                     horizontal:
@@ -162,6 +170,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ],
                                 )),
                             Padding(
+                                key: Key('secondPage'),
                                 padding: EdgeInsets.symmetric(
                                     vertical: SizeConfig.safeBlockVertical * 3,
                                     horizontal:
@@ -202,6 +211,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ],
                                 )),
                             Padding(
+                                key: Key('thirdPage'),
                                 padding: EdgeInsets.all(40.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,7 +227,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.safeBlockVertical *2), // CHANGE THIS
+                                    SizedBox(
+                                        height: SizeConfig.safeBlockVertical *
+                                            2), // CHANGE THIS
                                     Center(
                                       child: ClipOval(
                                         child: RaisedButton(
@@ -231,8 +243,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                           color: Colors.white,
                                           padding: new EdgeInsets.all(30.0),
                                           onPressed: () async {
-                                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                                            initScreen = prefs.getInt("initScreen");
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            initScreen =
+                                                prefs.getInt("initScreen");
                                             await prefs.setInt("initScreen", 1);
                                             print('initScreen $initScreen');
                                             Navigator.push(
@@ -245,7 +260,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: SizeConfig.safeBlockVertical * 3),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.safeBlockVertical * 3),
                                     Center(
                                       child: Text(
                                         'Lets get Started!',

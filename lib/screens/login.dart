@@ -34,12 +34,12 @@ class _LoginState extends State<Login> {
 
   // Method that builds main scaffold of the screen
   _buildSocialLogin(context) {
-    SizeConfig().init(context);   
+    SizeConfig().init(context);
 
     return Scaffold(
       backgroundColor: themeColor,
       body: Container(
-        // Background image is an asset 
+          // Background image is an asset
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
           child: Center(
             // Display Text that says logged in if successful, otherwise show log-in options
             child: loggedIn
-                ? Text("Logged in")   
+                ? Text("Logged in")
                 : Stack(
                     children: <Widget>[
                       Container(
@@ -71,7 +71,10 @@ class _LoginState extends State<Login> {
                                   child: TypewriterAnimatedTextKit(
                                     speed: Duration(milliseconds: 60),
                                     alignment: Alignment.topLeft,
-                                    text: ["Welcome to Science Bowl Portable"],
+                                    key: Key('welcomeMsg'),
+                                    text: [
+                                      "Welcome to Science Bowl Portable",
+                                    ],
                                     isRepeatingAnimation: false,
                                     textStyle: TextStyle(
                                       // fontSize:
@@ -95,7 +98,7 @@ class _LoginState extends State<Login> {
           )),
     );
   }
-  
+
   Container _buildGoogleLoginButton() {
     return Container(
       child: ButtonTheme(
@@ -109,7 +112,7 @@ class _LoginState extends State<Login> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             textColor: Colors.white,
-            label: Text("    Continue with Google", style: loginButtonText)),
+            label: Text("    Continue with Google", style: loginButtonText, key: Key('googleLogin'),)),
       ),
     );
   }
@@ -136,10 +139,9 @@ class _LoginState extends State<Login> {
     );
   }
 
-
   // sets logged in bool as true if login suceeds and continues to next page accordingly
   // if user is a returning user then user is taken to home page
-  // if user is a new user then user is directed to username page  
+  // if user is a new user then user is directed to username page
   void initiateSignIn(String type) {
     _handleSignIn(type).then((result) {
       print("If there is a 0 in the next line then login was unsucessful = ");
