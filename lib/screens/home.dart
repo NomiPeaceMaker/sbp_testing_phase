@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   image: AssetImage("assets/homeBG.png"), fit: BoxFit.cover)),
           child: Scaffold(
             drawer: Drawer(
+              key: Key("homeDrawer"),
                 child: ListView(
               children: [
                 DrawerHeader(
@@ -105,15 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             MaterialPageRoute(
                                 builder: (context) => OnboardingScreen()),
                           );
-                        }).catchError((e){
+                        }).catchError((e) {
                           print("not logged out");
                           Fluttertoast.showToast(
-                              msg: "Log out failed",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                            msg: "Log out failed",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
                           );
-
-
                         });
                       },
                       child: Container(
@@ -208,6 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _buildButton(String title, landingPage) {
     return Padding(
+        key: Key(title),
         padding: EdgeInsets.symmetric(
             vertical: SizeConfig.safeBlockVertical * 3.5,
             horizontal: SizeConfig.safeBlockHorizontal * 5),
@@ -248,6 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _buildNoInternetbutton(String title, landingPage) {
     return Padding(
+        key: Key(title),
         padding: EdgeInsets.symmetric(
             vertical: SizeConfig.safeBlockVertical * 3.5,
             horizontal: SizeConfig.safeBlockHorizontal * 5),

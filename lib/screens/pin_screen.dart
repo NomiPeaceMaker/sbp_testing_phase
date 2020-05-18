@@ -107,6 +107,7 @@ class _PinScreenState extends State<PinScreen> {
                 children: <Widget>[
                   new Expanded(
                     child: new TextField(
+                      key: Key('pinField'),
                       autofocus: true,
                       decoration: new InputDecoration(
                         labelText: 'Match PIN',
@@ -120,6 +121,7 @@ class _PinScreenState extends State<PinScreen> {
             ),
             actions: <Widget>[
               FlatButton(
+                key: Key('cancelJoin'),
                   child: Text('Cancel'),
                   textColor: Colors.red,
                   onPressed: () {
@@ -128,6 +130,7 @@ class _PinScreenState extends State<PinScreen> {
 //                  Navigator.of(context).pop(teamName);
               ),
               FlatButton(
+                key: Key('confirmJoin'),
                 child: Text('Confirm'),
                   textColor: Colors.green,
                 onPressed: () async {

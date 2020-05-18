@@ -102,6 +102,7 @@ class _MatchSettingState extends State<MatchSettings> {
           centerTitle: true,
           leading: Builder(
             builder: (context) => IconButton(
+              key: Key('matchBack'),
               icon: new Icon(Icons.arrow_back),
               iconSize: 32,
               onPressed: () => Navigator.pop(context),
